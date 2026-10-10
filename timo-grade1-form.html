@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đề Thi TIMO – Vòng Loại – Khối Lớp 1</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f0ebf8;
+      font-family: "Google Sans", Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #202124;
+      min-height: 100vh;
+      padding: 20px 0 60px;
+    }
+
+    .form-wrapper {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ── Header card ── */
+    .header-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.08);
+      border-top: 10px solid #7248b9;
+    }
+
+    .header-inner {
+      padding: 24px;
+    }
+
+    .form-title {
+      font-size: 32px;
+      font-weight: 400;
+      color: #202124;
+      margin-bottom: 4px;
+    }
+
+    .form-subtitle {
+      font-size: 14px;
+      color: #444746;
+      margin-bottom: 16px;
+    }
+
+    .form-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #444746;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 16px;
+    }
+
+    .required-note {
+      font-size: 13px;
+      color: #c5221f;
+      margin-top: 12px;
+    }
+
+    /* ── Section header ── */
+    .section-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 18px 24px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.08);
+      border-left: 6px solid #7248b9;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #7248b9;
+      margin-bottom: 4px;
+    }
+
+    .section-desc {
+      font-size: 13px;
+      color: #5f6368;
+      line-height: 1.5;
+    }
+
+    /* ── Question card ── */
+    .question-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px 24px 16px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.08);
+      transition: box-shadow .15s;
+    }
+
+    .question-card:hover {
+      box-shadow: 0 2px 6px rgba(0,0,0,.14), 0 4px 12px rgba(0,0,0,.10);
+    }
+
+    .question-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: #7248b9;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 6px;
+    }
+
+    .question-text {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 14px;
+      color: #202124;
+    }
+
+    .required-star {
+      color: #c5221f;
+      margin-left: 3px;
+    }
+
+    /* Radio options */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background .12s;
+      font-size: 14px;
+    }
+
+    .option-label:hover {
+      background: #f5f0ff;
+    }
+
+    .option-label input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #7248b9;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    /* Short answer */
+    .short-answer-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #dadce0;
+      padding: 8px 0;
+      font-size: 14px;
+      font-family: inherit;
+      color: #202124;
+      background: transparent;
+      outline: none;
+      transition: border-color .15s;
+    }
+
+    .short-answer-input:focus {
+      border-bottom: 2px solid #7248b9;
+    }
+
+    .short-answer-input::placeholder {
+      color: #9aa0a6;
+    }
+
+    /* Image placeholder */
+    .image-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8f9fa;
+      border: 1px dashed #dadce0;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #5f6368;
+      margin-bottom: 12px;
+    }
+
+    .image-note svg {
+      flex-shrink: 0;
+    }
+
+    /* Submit bar */
+    .submit-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .submit-btn {
+      background: #7248b9;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .15s, box-shadow .15s;
+    }
+
+    .submit-btn:hover {
+      background: #5e3a9e;
+      box-shadow: 0 2px 8px rgba(114,72,185,.35);
+    }
+
+    .clear-link {
+      font-size: 13px;
+      color: #7248b9;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .clear-link:hover { text-decoration: underline; }
+
+    .points-badge {
+      font-size: 12px;
+      background: #f0ebf8;
+      color: #7248b9;
+      border-radius: 12px;
+      padding: 2px 10px;
+      font-weight: 600;
+      float: right;
+    }
+
+    /* Score display */
+    #score-display {
+      display: none;
+      background: #fff;
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.08);
+      border-top: 8px solid #7248b9;
+    }
+
+    #score-display h2 { font-size: 24px; color: #7248b9; margin-bottom: 8px; }
+    #score-display p  { font-size: 15px; color: #444746; }
+
+    @media (max-width: 680px) {
+      .form-wrapper { padding: 0 8px; }
+      .form-title { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-wrapper">
+
+  <!-- ══════════ HEADER ══════════ -->
+  <div class="header-card">
+    <div class="header-inner">
+      <div class="form-title">Đề Thi TIMO – Vòng Loại</div>
+      <div class="form-subtitle">Khối Lớp 1 · Thailand International Mathematical Olympiad</div>
+      <div class="form-desc">
+        <strong>Thời gian làm bài:</strong> 60 phút<br/>
+        <strong>Tổng điểm:</strong> 120 điểm<br/>
+        <strong>Cơ cấu đề:</strong>
+        <ul style="margin: 8px 0 0 20px; line-height: 1.8;">
+          <li>Phần 1 (Câu 1–20): Trắc nghiệm – 4 điểm/câu</li>
+          <li>Phần 2 (Câu 21–30): Điền đáp án – 4 điểm/câu (bonus: câu 21–25 mỗi câu đúng +4, sai –1)</li>
+        </ul>
+        <br/>Học sinh <strong>không</strong> được sử dụng máy tính bỏ túi.
+        Làm bài trung thực, không trao đổi.
+      </div>
+      <div class="required-note">* Bắt buộc</div>
+    </div>
+  </div>
+
+  <!-- Họ tên -->
+  <div class="question-card">
+    <div class="question-text">Họ và tên học sinh <span class="required-star">*</span></div>
+    <input class="short-answer-input" type="text" placeholder="Nhập họ tên đầy đủ" required />
+  </div>
+
+  <!-- Trường / Lớp -->
+  <div class="question-card">
+    <div class="question-text">Trường / Lớp <span class="required-star">*</span></div>
+    <input class="short-answer-input" type="text" placeholder="Ví dụ: Tiểu học Nguyễn Trãi – Lớp 1A" required />
+  </div>
+
+  <!-- ══════════ PHẦN 1 ══════════ -->
+  <div class="section-card">
+    <div class="section-title">PHẦN 1 – Trắc nghiệm (Câu 1 → 20)</div>
+    <div class="section-desc">
+      Chọn một đáp án đúng nhất cho mỗi câu. Mỗi câu đúng được <strong>4 điểm</strong>.
+      Không trừ điểm khi sai.
+    </div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="question-card">
+    <div class="question-number">Câu 1 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">Tính: 3 + 5 = ? <span class="required-star">*</span></div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q1" value="A" />A. 7</label>
+      <label class="option-label"><input type="radio" name="q1" value="B" />B. 8</label>
+      <label class="option-label"><input type="radio" name="q1" value="C" />C. 9</label>
+      <label class="option-label"><input type="radio" name="q1" value="D" />D. 6</label>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-card">
+    <div class="question-number">Câu 2 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">Tính: 10 − 4 = ? <span class="required-star">*</span></div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q2" value="A" />A. 5</label>
+      <label class="option-label"><input type="radio" name="q2" value="B" />B. 6</label>
+      <label class="option-label"><input type="radio" name="q2" value="C" />C. 7</label>
+      <label class="option-label"><input type="radio" name="q2" value="D" />D. 8</label>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-card">
+    <div class="question-number">Câu 3 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Dãy số: 2 , 4 , 6 , 8 , <strong>___</strong><br/>
+      Số tiếp theo là bao nhiêu? <span class="required-star">*</span>
+    </div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q3" value="A" />A. 9</label>
+      <label class="option-label"><input type="radio" name="q3" value="B" />B. 10</label>
+      <label class="option-label"><input type="radio" name="q3" value="C" />C. 11</label>
+      <label class="option-label"><input type="radio" name="q3" value="D" />D. 12</label>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-card">
+    <div class="question-number">Câu 4 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Có 6 con chim đậu trên cành, 2 con bay đi. Còn lại bao nhiêu con chim? <span class="required-star">*</span>
+    </div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q4" value="A" />A. 3</label>
+      <label class="option-label"><input type="radio" name="q4" value="B" />B. 4</label>
+      <label class="option-label"><input type="radio" name="q4" value="C" />C. 5</label>
+      <label class="option-label"><input type="radio" name="q4" value="D" />D. 8</label>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-card">
+    <div class="question-number">Câu 5 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">Hình nào có đúng 3 cạnh? <span class="required-star">*</span></div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q5" value="A" />A. Hình tròn</label>
+      <label class="option-label"><input type="radio" name="q5" value="B" />B. Hình vuông</label>
+      <label class="option-label"><input type="radio" name="q5" value="C" />C. Hình tam giác</label>
+      <label class="option-label"><input type="radio" name="q5" value="D" />D. Hình chữ nhật</label>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-card">
+    <div class="question-number">Câu 6 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Lan có 7 cái kẹo, mẹ cho thêm 3 cái. Lan có tất cả bao nhiêu cái kẹo? <span class="required-star">*</span>
+    </div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q6" value="A" />A. 9</label>
+      <label class="option-label"><input type="radio" name="q6" value="B" />B. 10</label>
+      <label class="option-label"><input type="radio" name="q6" value="C" />C. 11</label>
+      <label class="option-label"><input type="radio" name="q6" value="D" />D. 4</label>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question-card">
+    <div class="question-number">Câu 7 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">Số nào <strong>lớn nhất</strong> trong các số sau? <span class="required-star">*</span></div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q7" value="A" />A. 15</label>
+      <label class="option-label"><input type="radio" name="q7" value="B" />B. 12</label>
+      <label class="option-label"><input type="radio" name="q7" value="C" />C. 18</label>
+      <label class="option-label"><input type="radio" name="q7" value="D" />D. 16</label>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question-card">
+    <div class="question-number">Câu 8 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">Tính: 9 − 3 = ? <span class="required-star">*</span></div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q8" value="A" />A. 5</label>
+      <label class="option-label"><input type="radio" name="q8" value="B" />B. 6</label>
+      <label class="option-label"><input type="radio" name="q8" value="C" />C. 7</label>
+      <label class="option-label"><input type="radio" name="q8" value="D" />D. 8</label>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="question-card">
+    <div class="question-number">Câu 9 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Dãy số: 10 , 20 , 30 , 40 , <strong>___</strong><br/>
+      Số tiếp theo là? <span class="required-star">*</span>
+    </div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q9" value="A" />A. 41</label>
+      <label class="option-label"><input type="radio" name="q9" value="B" />B. 45</label>
+      <label class="option-label"><input type="radio" name="q9" value="C" />C. 50</label>
+      <label class="option-label"><input type="radio" name="q9" value="D" />D. 55</label>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="question-card">
+    <div class="question-number">Câu 10 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">Tính: 6 + 7 = ? <span class="required-star">*</span></div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q10" value="A" />A. 11</label>
+      <label class="option-label"><input type="radio" name="q10" value="B" />B. 12</label>
+      <label class="option-label"><input type="radio" name="q10" value="C" />C. 13</label>
+      <label class="option-label"><input type="radio" name="q10" value="D" />D. 14</label>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="question-card">
+    <div class="question-number">Câu 11 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Có 10 viên bi, lấy đi 6 viên. Còn lại bao nhiêu viên? <span class="required-star">*</span>
+    </div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q11" value="A" />A. 3</label>
+      <label class="option-label"><input type="radio" name="q11" value="B" />B. 4</label>
+      <label class="option-label"><input type="radio" name="q11" value="C" />C. 5</label>
+      <label class="option-label"><input type="radio" name="q11" value="D" />D. 6</label>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="question-card">
+    <div class="question-number">Câu 12 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">Số nào <strong>nhỏ nhất</strong> trong các số sau? <span class="required-star">*</span></div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q12" value="A" />A. 20</label>
+      <label class="option-label"><input type="radio" name="q12" value="B" />B. 17</label>
+      <label class="option-label"><input type="radio" name="q12" value="C" />C. 25</label>
+      <label class="option-label"><input type="radio" name="q12" value="D" />D. 14</label>
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="question-card">
+    <div class="question-number">Câu 13 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">Tính: 8 + 4 = ? <span class="required-star">*</span></div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q13" value="A" />A. 10</label>
+      <label class="option-label"><input type="radio" name="q13" value="B" />B. 11</label>
+      <label class="option-label"><input type="radio" name="q13" value="C" />C. 12</label>
+      <label class="option-label"><input type="radio" name="q13" value="D" />D. 13</label>
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="question-card">
+    <div class="question-number">Câu 14 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Dãy số: 1 , 3 , 5 , 7 , <strong>___</strong><br/>
+      Số tiếp theo là? <span class="required-star">*</span>
+    </div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q14" value="A" />A. 8</label>
+      <label class="option-label"><input type="radio" name="q14" value="B" />B. 9</label>
+      <label class="option-label"><input type="radio" name="q14" value="C" />C. 10</label>
+      <label class="option-label"><input type="radio" name="q14" value="D" />D. 11</label>
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="question-card">
+    <div class="question-number">Câu 15 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Nam có 5 quả táo, Hoa có nhiều hơn Nam 3 quả. Hoa có bao nhiêu quả táo? <span class="required-star">*</span>
+    </div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q15" value="A" />A. 7</label>
+      <label class="option-label"><input type="radio" name="q15" value="B" />B. 8</label>
+      <label class="option-label"><input type="radio" name="q15" value="C" />C. 9</label>
+      <label class="option-label"><input type="radio" name="q15" value="D" />D. 2</label>
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="question-card">
+    <div class="question-number">Câu 16 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">Tính: 15 − 7 = ? <span class="required-star">*</span></div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q16" value="A" />A. 6</label>
+      <label class="option-label"><input type="radio" name="q16" value="B" />B. 7</label>
+      <label class="option-label"><input type="radio" name="q16" value="C" />C. 8</label>
+      <label class="option-label"><input type="radio" name="q16" value="D" />D. 9</label>
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="question-card">
+    <div class="question-number">Câu 17 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Trên bàn có 4 hình tam giác và 3 hình vuông. Có tất cả bao nhiêu hình? <span class="required-star">*</span>
+    </div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q17" value="A" />A. 6</label>
+      <label class="option-label"><input type="radio" name="q17" value="B" />B. 7</label>
+      <label class="option-label"><input type="radio" name="q17" value="C" />C. 8</label>
+      <label class="option-label"><input type="radio" name="q17" value="D" />D. 1</label>
+    </div>
+  </div>
+
+  <!-- Q18 -->
+  <div class="question-card">
+    <div class="question-number">Câu 18 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">Số liền <strong>sau</strong> của 19 là số nào? <span class="required-star">*</span></div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q18" value="A" />A. 18</label>
+      <label class="option-label"><input type="radio" name="q18" value="B" />B. 20</label>
+      <label class="option-label"><input type="radio" name="q18" value="C" />C. 21</label>
+      <label class="option-label"><input type="radio" name="q18" value="D" />D. 17</label>
+    </div>
+  </div>
+
+  <!-- Q19 -->
+  <div class="question-card">
+    <div class="question-number">Câu 19 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Một lớp học có 20 học sinh. Hôm nay 5 bạn nghỉ học. Hỏi có bao nhiêu bạn đi học? <span class="required-star">*</span>
+    </div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q19" value="A" />A. 25</label>
+      <label class="option-label"><input type="radio" name="q19" value="B" />B. 15</label>
+      <label class="option-label"><input type="radio" name="q19" value="C" />C. 14</label>
+      <label class="option-label"><input type="radio" name="q19" value="D" />D. 16</label>
+    </div>
+  </div>
+
+  <!-- Q20 -->
+  <div class="question-card">
+    <div class="question-number">Câu 20 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Tính: 5 + 4 + 3 = ? <span class="required-star">*</span>
+    </div>
+    <div class="options-list">
+      <label class="option-label"><input type="radio" name="q20" value="A" />A. 10</label>
+      <label class="option-label"><input type="radio" name="q20" value="B" />B. 11</label>
+      <label class="option-label"><input type="radio" name="q20" value="C" />C. 12</label>
+      <label class="option-label"><input type="radio" name="q20" value="D" />D. 13</label>
+    </div>
+  </div>
+
+  <!-- ══════════ PHẦN 2 ══════════ -->
+  <div class="section-card">
+    <div class="section-title">PHẦN 2 – Điền đáp án (Câu 21 → 30)</div>
+    <div class="section-desc">
+      Điền kết quả đúng vào ô trống. Câu 21–25: đúng <strong>+4 điểm</strong>, sai <strong>−1 điểm</strong>.
+      Câu 26–30: đúng <strong>+4 điểm</strong>, sai không trừ điểm.
+    </div>
+  </div>
+
+  <!-- Q21 -->
+  <div class="question-card">
+    <div class="question-number">Câu 21 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">5 + <strong>___</strong> = 12 <span class="required-star">*</span></div>
+    <input class="short-answer-input" type="number" min="0" max="99" name="q21" placeholder="Nhập số" required />
+  </div>
+
+  <!-- Q22 -->
+  <div class="question-card">
+    <div class="question-number">Câu 22 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text"><strong>___</strong> − 4 = 7 <span class="required-star">*</span></div>
+    <input class="short-answer-input" type="number" min="0" max="99" name="q22" placeholder="Nhập số" required />
+  </div>
+
+  <!-- Q23 -->
+  <div class="question-card">
+    <div class="question-number">Câu 23 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">14 − <strong>___</strong> = 9 <span class="required-star">*</span></div>
+    <input class="short-answer-input" type="number" min="0" max="99" name="q23" placeholder="Nhập số" required />
+  </div>
+
+  <!-- Q24 -->
+  <div class="question-card">
+    <div class="question-number">Câu 24 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Số liền <strong>trước</strong> của 30 là số <strong>___</strong> <span class="required-star">*</span>
+    </div>
+    <input class="short-answer-input" type="number" min="0" max="99" name="q24" placeholder="Nhập số" required />
+  </div>
+
+  <!-- Q25 -->
+  <div class="question-card">
+    <div class="question-number">Câu 25 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Trong các số: 11 , 15 , 8 , 20 , 13 – số <strong>lớn nhất</strong> là <strong>___</strong> <span class="required-star">*</span>
+    </div>
+    <input class="short-answer-input" type="number" min="0" max="99" name="q25" placeholder="Nhập số" required />
+  </div>
+
+  <!-- Q26 -->
+  <div class="question-card">
+    <div class="question-number">Câu 26 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Có 3 hộp bút chì, mỗi hộp có 4 cái. Có tất cả bao nhiêu cái bút chì? <strong>___</strong> <span class="required-star">*</span>
+    </div>
+    <input class="short-answer-input" type="number" min="0" max="99" name="q26" placeholder="Nhập số" required />
+  </div>
+
+  <!-- Q27 -->
+  <div class="question-card">
+    <div class="question-number">Câu 27 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Tính: 7 + 8 = <strong>___</strong> <span class="required-star">*</span>
+    </div>
+    <input class="short-answer-input" type="number" min="0" max="99" name="q27" placeholder="Nhập số" required />
+  </div>
+
+  <!-- Q28 -->
+  <div class="question-card">
+    <div class="question-number">Câu 28 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      An xếp các khối vuông thành một hàng: ■ ■ ■ ■ ■ ■ ■ ■ ■ ■<br/>
+      An xếp được <strong>___</strong> khối vuông. <span class="required-star">*</span>
+    </div>
+    <input class="short-answer-input" type="number" min="0" max="99" name="q28" placeholder="Nhập số" required />
+  </div>
+
+  <!-- Q29 -->
+  <div class="question-card">
+    <div class="question-number">Câu 29 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Dãy số: 5 , 10 , 15 , 20 , 25 , <strong>___</strong><br/>
+      Số tiếp theo là <strong>___</strong> <span class="required-star">*</span>
+    </div>
+    <input class="short-answer-input" type="number" min="0" max="99" name="q29" placeholder="Nhập số" required />
+  </div>
+
+  <!-- Q30 -->
+  <div class="question-card">
+    <div class="question-number">Câu 30 <span class="points-badge">4 điểm</span></div>
+    <div class="question-text">
+      Minh có 20 nhãn vở. Minh cho bạn Tuấn 8 nhãn và cho bạn Linh 5 nhãn.
+      Minh còn lại bao nhiêu nhãn vở? <strong>___</strong> <span class="required-star">*</span>
+    </div>
+    <input class="short-answer-input" type="number" min="0" max="99" name="q30" placeholder="Nhập số" required />
+  </div>
+
+  <!-- ══════════ SUBMIT ══════════ -->
+  <div class="question-card">
+    <div class="submit-bar">
+      <button type="button" class="submit-btn" onclick="submitForm()">Nộp bài</button>
+      <a class="clear-link" onclick="clearForm()">Xóa toàn bộ</a>
+    </div>
+  </div>
+
+  <!-- Score result -->
+  <div id="score-display">
+    <h2 id="score-title">Kết quả</h2>
+    <p id="score-detail"></p>
+    <br/>
+    <button class="submit-btn" onclick="document.getElementById('score-display').style.display='none'">Xem lại bài</button>
+  </div>
+
+</div><!-- /form-wrapper -->
+
+<script>
+  // Correct answers
+  const ANSWERS = {
+    q1:  'B', // 8
+    q2:  'B', // 6
+    q3:  'B', // 10
+    q4:  'B', // 4
+    q5:  'C', // tam giác
+    q6:  'B', // 10
+    q7:  'C', // 18
+    q8:  'B', // 6
+    q9:  'C', // 50
+    q10: 'C', // 13
+    q11: 'B', // 4
+    q12: 'D', // 14
+    q13: 'C', // 12
+    q14: 'B', // 9
+    q15: 'B', // 8
+    q16: 'C', // 8
+    q17: 'B', // 7
+    q18: 'B', // 20
+    q19: 'B', // 15
+    q20: 'C', // 12
+    q21: '7',
+    q22: '11',
+    q23: '5',
+    q24: '29',
+    q25: '20',
+    q26: '12',
+    q27: '15',
+    q28: '10',
+    q29: '30',
+    q30: '7',
+  };
+
+  function submitForm() {
+    let score = 0;
+    let correct = 0;
+    let wrong = 0;
+
+    // Part 1 – multiple choice (no penalty)
+    for (let i = 1; i <= 20; i++) {
+      const key = 'q' + i;
+      const selected = document.querySelector(`input[name="${key}"]:checked`);
+      if (selected && selected.value === ANSWERS[key]) {
+        score += 4;
+        correct++;
+      }
+    }
+
+    // Part 2 – short answer: q21–q25 with -1 penalty, q26–q30 no penalty
+    for (let i = 21; i <= 30; i++) {
+      const key = 'q' + i;
+      const input = document.querySelector(`input[name="${key}"]`);
+      if (!input) continue;
+      const val = input.value.trim();
+      if (val === ANSWERS[key]) {
+        score += 4;
+        correct++;
+      } else if (val !== '' && i <= 25) {
+        score -= 1;
+        wrong++;
+      }
+    }
+
+    const display = document.getElementById('score-display');
+    const title   = document.getElementById('score-title');
+    const detail  = document.getElementById('score-detail');
+
+    title.textContent  = `Tổng điểm: ${score} / 120`;
+    detail.textContent = `Số câu đúng: ${correct}  |  Phần 2 bị trừ điểm (câu 21–25 sai): ${wrong} câu`;
+    display.style.display = 'block';
+    display.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function clearForm() {
+    if (!confirm('Bạn có chắc muốn xóa toàn bộ câu trả lời?')) return;
+    document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+    document.querySelectorAll('input[type="number"], input[type="text"]').forEach(i => i.value = '');
+    document.getElementById('score-display').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
